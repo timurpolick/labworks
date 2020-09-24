@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace  std;
+bool pause, hittingArea, dataInputted;
+float x, y;
+void CheckBoundaries(float x, float y){
+    dataInputted = true;
+    if((y >= 0 && y <= 1) && (x <= 1 && x>= 0)){
+        cout <<"Точка попадає в область \n";
+        hittingArea = true;
+    }
+    else{
+        if((x*x+y*y <= 1) && x >= 0 && y <= 0){
+            hittingArea = true;
+            cout <<"Точка попадає в область \n";
+        }
+        else{
+            hittingArea = false;
+            cout <<"Точка не попадає в область \n";
+        }
+    }
+}
+void InputData(){
+    cout<<"Введіть дані вашої точки \n";
+    cin>>x>>y;
+    CheckBoundaries(x, y);
+}
+void ReturnResult(){
+    if(dataInputted){
+        if(hittingArea) cout << "Точка попадає в область (за данними, що були введенні) \n";
+        else cout << "Точка не попадає в область (за данними, що були введенні) \n";
+    }
+    else cout << "Ви ще не ввели данні \n";
+}
+int Exit() { return 0; }
+void Menu(){
+    while(!pause){
+        cout<<"Оберіть одну із можливих опцій: \n";
+        cout<<" \n";
+        cout<<"1 - Введення данних \n 2 - Виведення результату \n 3 - Вийти з программи \n";
+        int choosedOption;
+        cin>>choosedOption;
+        switch (choosedOption) {
+            case 1:
+                InputData();
+                break;
+            case 2:
+                ReturnResult();
+                break;
+            case 3:
+                pause = true;
+                Exit();
+                break;
+            default: cout<<"Немає такої опціі :( \n";
+        }
+    }
+}
+int main() {
+    Menu();
+    return 0;
+}
